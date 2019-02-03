@@ -5,6 +5,7 @@
 __author__ = 'Sri Manikanta Palakollu.'
 
 # Imports
+
 import smtplib
 import platform
 import getpass
@@ -16,7 +17,8 @@ mail_server = input("Enter Your Mail Server : ")
 if mail_server.lower() == 'gmail':
 
 		try:
-			server = smtplib.SMTP('smtp.gmail.com',587)	
+			cprint('Trying to Connect the server...!',color='magenta',attrs=['bold'])
+			server = smtplib.SMTP('smtp.gmail.com',587)
 			server.starttls()
 		except smtplib.SMTPConnectError:
 			cprint('Internet Connectivity issue : Please Check your internet connection',color='red',attrs=['bold','blink'])
@@ -62,13 +64,15 @@ if mail_server.lower() == 'gmail':
 						print ("{} spam mail send successfully! : ".format(count + 1))
 					else:
 						print ("{} spam mail's send successfully! : ".format(count + 1))
-						
+
 			except smtplib.SMTPSenderRefused:
 				cprint('Sender Refused to Send the Mail:Something went wrong',color='red',attrs=['bold'])
 				sys.exit(0)
 			except smtplib.SMTPRecipientsRefused:
 				cprint('Recipients Refused Error: Something went wrong.',color='red',attrs=['bold'])
 				sys.exit(0)
+			except Exception:
+				cprint('Something went wrong while sending mail.')
 
 			server.quit()
 
