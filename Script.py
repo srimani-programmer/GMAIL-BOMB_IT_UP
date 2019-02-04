@@ -21,13 +21,16 @@ if mail_server.lower() == 'gmail':
 			server = smtplib.SMTP('smtp.gmail.com',587)
 			server.starttls()
 		except smtplib.SMTPConnectError:
-			cprint('Internet Connectivity issue : Please Check your internet connection',color='red',attrs=['bold','blink'])
+			cprint('SMTP Connectivity Error',color='red',attrs=['bold','blink'])
 			sys.exit(0)
 		except ConnectionResetError:
 			cprint('Connection was Reset by peer',color='red',attrs=['bold'])
 			sys.exit(0)
 		except smtplib.SMTPServerDisconnected:
 			cprint('Server disconnected',color='red',attrs=['bold'])
+			sys.exit(0)
+		except Exception:
+			cprint('Internet Connectivity Issue: Please check your Internet connection.',color='red',attrs=['bold'])
 			sys.exit(0)
 		
 		'''except Exception:
